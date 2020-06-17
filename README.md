@@ -10,7 +10,7 @@ Több módon is beillesztheted az oldaladba a Bootstrap keretrendszert.
 ### CDN használata
 A CDN a tartalom továbbító hálózat rövidítése. Ha lekérsz rajta keresztül egy fájlt, akkor igyekszik mindig a legközelebbi szerverről visszaküldeni neked, hogy minél gyorsabban megkapd. Viszont hátránya, hogy nem garantálja hogy a fájl mindig fent lesz a szervereden, így tesztelési vagy oktatási célra alkalmas, éles rendszerhez pedig saját vagy fizetett CDN ajánlott.
 
-Négy fájlra lesz szükséged, a css-t a fejlécbe, a js fájlokat a body végére célszerű elhelyezni:
+Négy fájlra lesz szükséged, a css-t a fejlécbe, a js fájlokat a body végére célszerű elhelyezni:  
 `<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">`
 
 `<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>`
@@ -24,7 +24,7 @@ Ha a fájlokat a saját szervereden akarod elhelyezni, akkor először le kell �
 Léteznek automatikus csomagkezelők, amelyek egy paranccsal rávehetők, hogy letöltsék a külső alkalmazásokat. Ilyenek például: NPM.
 
 ### Eszköz szélessége
-A Bootstrap esetében fontos, hogy mindig igazodik az ablak szélességéhez, azaz a vízszintes görgetést elkerüli. Így mobilon is könnyen használható lesz az oldal. Ehhez viszont be kell állítani egy meta elemet az oldal fejlécében:
+A Bootstrap esetében fontos, hogy mindig igazodik az ablak szélességéhez, azaz a vízszintes görgetést elkerüli. Így mobilon is könnyen használható lesz az oldal. Ehhez viszont be kell állítani egy meta elemet az oldal fejlécében:  
 `<meta name="viewport" content="width=device-width, initial-scale=1">`
 A mobil eszközöknek különböző a felbontása, ezért a gyártó megadja, hogy hogyan skálázódjon az oldal az ő eszközén. Mert hiába QHD azaz négyszeres FullHD a felbontás, attól még a kijelző kicsi. Ezt követi le a Bootstrap.
 
@@ -34,7 +34,7 @@ A mobil eszközöknek különböző a felbontása, ezért a gyártó megadja, ho
 Hogy gyorsabb legyen az egyes elemek szélességét megadni, a Bootstrap bevezette az úgynevezett rácsrendszert. Ez arra való, hogy az elemek szélessége százalékosan igazodjon a befogadó ablak szélességéhez.
 
 ### Row - (sor)
-Úgy kell elképzelni ezt a rácsrendszert, mint egy táblázatot. Vannak benne sorok és oszlopok, ahol találkoznak ott vannak a cellák. Ha új tartalmat szeretnél létrehozni, akkor először mindig kell egy sor, amibe majd beteszed az oszlopokat. Ez alapvetően egy div, amit a row osztályhoz kell rendelned:
+Úgy kell elképzelni ezt a rácsrendszert, mint egy táblázatot. Vannak benne sorok és oszlopok, ahol találkoznak ott vannak a cellák. Ha új tartalmat szeretnél létrehozni, akkor először mindig kell egy sor, amibe majd beteszed az oszlopokat. Ez alapvetően egy div, amit a row osztályhoz kell rendelned:  
 `<div class="row"></div>`
 
 ### Col - column (oszlop)
