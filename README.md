@@ -11,7 +11,7 @@ Több módon is beillesztheted az oldaladba a Bootstrap keretrendszert.
 A CDN a tartalom továbbító hálózat rövidítése. Ha lekérsz rajta keresztül egy fájlt, akkor igyekszik mindig a legközelebbi szerverről visszaküldeni neked, hogy minél gyorsabban megkapd. Viszont hátránya, hogy nem garantálja hogy a fájl mindig fent lesz a szervereden, így tesztelési vagy oktatási célra alkalmas, éles rendszerhez pedig saját vagy fizetett CDN ajánlott.
 
 Négy fájlra lesz szükséged, a css-t a fejlécbe, a js fájlokat a body végére célszerű elhelyezni:
-```<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+`<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">`
 
 `<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
