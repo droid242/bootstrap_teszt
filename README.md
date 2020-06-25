@@ -106,3 +106,60 @@ Lehetőséged van különböző háttérszínnel kiemelni a fontosabb adatokat. 
 * table-warning : #fcf8e3
 * table-danger : #f2dede
 * table-info : #d9edf7
+
+***
+
+### Bootstrap űrlapok
+Tudod, a mai információéhes világban az űrlapok talán a leggyakrabban használt HTML elemek. Természetesen Bootstrap barátunk segít megformázni őket.
+
+### Form elem
+Bootstrap esetén az űrlap vezérlőelemeit (input, label, select stb.) a `<div class="form-group"></div>` elemen belül kell elhelyezned. A form-group-on belül a konkrét beviteli elem a form-control osztályhoz kell hogy tartozzon. Például elhelyezel benne egy label-t és egy input-ot.
+
+* Alap űrlap: a vezérlők (input, select, stb...) a label-ek alatt vannak.
+* form-inline: a label és vezérlő sorban van.
+* form-horizontal: a label és vezérlő egymás mellett vannak (ebben az esetben a labelnek be kell állítani a szélességét egy col-* oszállyal és a vezérlőt div-be kell tenned).
+
+### Form vezérlő elemek
+Különböző input típusok vannak, például a checkbox vagy a radio. Ezekre is van megoldása a Bootstrap-nek, de egy kicsit másképp működnek.
+
+* checkbox: checkbox osztályú div-en belül, label-ben kell elhelyezned.
+* radio: ugyanaz, csak radio osztállyal.
+* `<select></select>`: csak hozzá kel adnod a form-control osztályhoz.
+* `<textarea></textarea>`: szintén form-control osztály.
+
+***
+
+### Bootstrap gombok
+
+### Button elem
+Gombot többféle elemből is lehet gyártani: `<a> <button> <input>`. Attól függ mire van épp szükség. Ha a megfelelő osztályokhoz rendeled őket, egy alapvetően kellemes megjelenést vesznek fel.
+
+Alap osztály a `btn`, ezt mindig rendeld hozzá az elemhez!
+
+### Gombok méretezése
+Szintén osztályokkal tudod a gombok méretét beállítani. Ha azt szeretnéd, hogy ne az alapértelmezett méretben jelenjenek meg, az alábbi osztályokat használd:
+
+* btn-lg : nagyobb méret,
+* btn-sm : kis méret,
+* btn-block : block szintű, teljesen kitölti a befogadó elemet.
+
+
+### Gombok állapota
+Mint a legtöbb HTML elemnek, a gomboknak is lehetnek állapotai, amelyeket szintén osztályok segítségével jeleníthetsz meg:
+
+* active : a gomb benyomott állapotú (pl. váltógomboknál hasznos),
+* disabled : halványabb színű és áthúzott kurzort kap.
+
+
+### Gomb csoportok
+Csoportosíthatod is a gombjaidat vezérlő elemekbe, csak annyit kell tenned, hogy `btn-group` oszályú div-be helyezed őket.
+
+***
+
+### Ikonok
+Sokkal szebb tud lenni egy vezérlőgomb vagy egy menüpont, ha teszel rá egy ikont. Erre a legjobb megoldás valamilyen webfont használata. Ezek olyan betűkészletek, amelyek nem betűket, hanem ábrákat tartalmaznak. A font-awesome nevűt nagyon egyszerűen használhatod:  
+1. Ágyazd be a CSS-t:  
+`<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">`  
+2. Válaszd ki a neked tetsző ikont a listából: [Ikonok](https://fontawesome.com/icons?d=gallery)  
+3. Illeszd be a doksi alapján:  
+`<i class="fas fa-cart-arrow-down"></i>`
