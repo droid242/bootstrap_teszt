@@ -163,3 +163,135 @@ Sokkal szebb tud lenni egy vezérlőgomb vagy egy menüpont, ha teszel rá egy i
 2. Válaszd ki a neked tetsző ikont a listából: [Ikonok](https://fontawesome.com/icons?d=gallery)  
 3. Illeszd be a doksi alapján:  
 `<i class="fas fa-cart-arrow-down"></i>`
+
+***
+
+# JavaScript
+
+### querySelector - elemek kiválasztása
+Ez a querySelector érdekes állatfajta. Ha a nevét két részre bontod, jobban megérted hogy mire való:
+
+* query: lékérés, lekérdezés, ami ebben az esetben egy HTML elem megkeresését jelenti az oldalon,
+* selector: a lekérés az elem CSS szelektorával történik.
+
+Tehát nem kell hozzá új technikákat megtanulnod, ahhoz hogy lekérj egy HTML elemet, elég ha ismered a CSS szelektorokat. Remélem még nem felejtetted el őket, mert most nagyon kelleni fognak. :) (Ha igen, akkor ugorj vissza kicsit, és nézd át őket!)
+
+`// Az első example osztályú elem`  
+`document.querySelector(".example");`  
+
+`// A test id -jű elem`  
+`document.querySelector("#test");`
+
+`// Az order id -jű űrlapon belül az amount nevű beviteli mező`  
+`document.querySelector("form#order input[name=amount]");`
+
+### value - az érték
+Oké, most már ki tudsz választani egy elemet az oldalon, de mit kezdesz vele? Az űrlap elemeknek van egy speciális tulajdonsága, a value. Ez mondja meg az elembe bevitt aktuális értéket. Most egy komplex példában kiválasztok egy elemet és kiolvasom az értékét.
+
+`<form id="order">`  
+`  <label>Mennyiség</label>`  
+`  <input name="amount" type="number">`  
+`  ...`  
+`</form>`
+
+Tehát van egy input-om, aminek a neve "amount" és az "order" id-jű űrlapban van. Akkor ezt a js kódban így is ki tudom választani (írhatsz más szelektort is igény szerint, lényeg hogy egyértelmű legyen).
+
+#### Input kiválasztása
+
+`let amountInput = document.querySelector("form#order input[name=amount]");`
+
+**Fontos:** kiválasztottam az input-ot és elmentettem egy változóba, hogy később is tudjak vele dolgozni. A változó egy input elemet jelent, mindent amit az input elemmel tudok csinálni, a változóval is tudok.
+
+#### Érték kiolvasása
+
+`let amount = parseInt(amountInput.value);`
+
+**Megjegyzés:** egyszerű mint a pofon. Az amountInput változó az inputot jelenti, ahova a vásárló beviszi hogy hány terméket szeretne. Ennek a value tulajdonságában van a szám ami nekem kell a rendelés árának a kalkulálásához. Ezt kiolvasom és elmentem az amount változóba. Viszont számmá alakítom, mert a böngésző az input-ok értékét String-ben adja vissza én pedig majd matekozni szeretnék vele.
+
+## Érték kiolvasása egy mezőből
+
+1. `let amountInput = document.querySelector("input=[name='amount-input']");`  
+2. `amountInput.value;`  
+3. `let price = 1200;`  
+4. `let amount = 0;`  
+5. `amount = parseInt(amountInput.value) * price;`
+
+### Events
+Az események (angolul events) alapvetőek a js programozásban. Amikor a felhaszáló kattint az oldaladon, vagy görget az egérrel, esetleg bevisz valamilyen adatot vagy elküld egy űrlapot, mindig történik egy esemény amit tudsz figyelni. A közös bennük, hogy nem tudod előre hogy pontosan mikor fognak bekövetkezni.
+
+#### Az onclick attribútum
+Sokféle eseménye létezik az elemeknek attól függően, hogy milyen fajták. Nem mutatom meg az összeset, most elég lesz az onclick nevű. A nevéből is látszik, hogy akkor következik be ez az esemény, amikor rákattintanak egy HTML elemre. Ez lehet gomb, div vagy gyakorlatilag bármilyen látható elem amire lehet kattintani.
+
+#### Kattintás esemény figyelésének beállítása egy gombra
+`<form id="order">`  
+`  <label>Mennyiség</label>`  
+`  <input name="amount" type="number">`  
+` `  
+`  <button class="btn btn-success" onclick="validateForm()">`  
+`    Megrendelés`  
+`  </button>`  
+`    ...`  
+`</form>`  
+
+Mit látsz?
+
+* Készítettem egy Bootstrap gombot zöld színben.
+* Az onclick attribútummal megadtam egy eseménykezelőt ami a js kódban lesz definiálva.
+
+#### Eseménykezelő függvény
+`function validateForm() {`  
+`  let amountInput = document.querySelector("form#order input[name=amount]");`  
+`  let amount = parseInt(amountInput.value);`  
+`}`
+
+***
+
+### HTML elemek módosítása
+JS segítségével könnyen tudod módosítani az oldalon a HTML elemek tartalmát. Most ezt fogom neked megmutatni, jó lesz.
+
+#### innerHTML
+Azoknak a HTML elemeknek amelyeknek van lezáró tag-je (azaz nem self-closed elemek) lehet tartalma. Az innerHTML tulajdonság js alól eléthető és ki lehet vele olvasni vagy lehet módosítani is az elemek tartlamát, azaz a bennük található HTML kódot.
+
+**Accessor:** az innerHTML egy accessor, mert el lehet érni vele egy bizonyos tulajdonságot olvasásra és írásra is.
+
+#### Egy elem HTML tartalmának kiolvasása
+`let messageContent = document.querySelector("form#order .message").innerHTML;`  
+
+**Mi történt?**  
+* Kiválasztottam az "order" id-jű űrlap "message" osztályú elemét.
+* Az innerHTML tulajdonság segítségével kiolvastam az aktuális tartalmát és elmentettem egy változóba.
+
+#### Tartalom módosítása
+Most kompletten megmutatom neked, hogyan lehet mondjuk kiírni a rendelés összegét egy p elembe?
+
+#### Az űrlap HTML kódja
+`<form id="order">`  
+`  <label>Mennyiség</label>`  
+`  <input name="amount" type="number">`  
+`  <button class="btn btn-success" onclick="validateForm()">`  
+`    Megrendelés`  
+`  </button>`  
+`  <p class="message">`  
+`    A rendelés összege <strong>0</strong> Ft`  
+`  </p>`  
+`</form>`  
+Tehát van egy űrlapod, benne az amount mezővel, egy gombbal és egy message paragrafussal az üzenetnek.
+
+#### A JS kód
+`function validateForm() {`  
+`  // Termék egységára.`  
+`  let pricePerPiece = 1200;`  
+` `  
+`  // Kiválasztom a mennyiséget és a message mező ár részét.`  
+`  let amountInput = document.querySelector("form#order input[name=amount]");`  
+`  let priceField = document.querySelector("form#order .message strong");`  
+` `  
+`  // Kiolvasom a bevitt mennyiséget és szorzom az egységárral.`  
+`  let amount = parseInt(amountInput.value);`  
+`  let totalAmount = amount * pricePerPiece;`  
+` `  
+`  // Kiírom az üzenetet, azaz frissítem az árat.`  
+`  priceField.innerHTML = '${totalAmount}';`  
+`}`  
+
+**Megjegyzés:** a függvény utolsó sora az érdekes most számodra. A priceField változó a p elemen belüli span elemet jelenti, ahol az összeg megjelenik. Ennek a tartalmát módosítottam a teljes összegre (totalAmount).
