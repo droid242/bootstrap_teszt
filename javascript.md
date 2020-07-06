@@ -98,3 +98,90 @@ Az eredemény ugyanaz lesz, de a későbbiekben látni fogod, hogy van hogy a po
 
 #### typeof
 A változók típusát a *typeof* beépített függvény segítségével kérhetjük le. Ez csak az alapvető típusokat ismeri, a későbbiekben foglalkozunk a pontosabb típus meghatározással is. A változó típusát a tulajdonságai és metódusai alapján is meg lehet határozni.
+
+***
+
+### Metódus
+Metódusnak azt nevezzük, amit egy típus csinálni tud.
+
+Hogy mi van?
+
+Az, hogy milyen hosszú egy String, az a tulajdonsága, olyan és kész. De hogy például képes a saját értékét visszaadni nagybetűs formában az már egy képessége amit végre tud hajtani. A metódus szó módszert jelent. A metódusok írják le, hogy pontosan hogyan megy végbe például egy nagybetűssé alakítás. A különböző típusok esetén vannak átfedések, azaz egy tulajdonság vagy metódus több típus esetén is létezhet.
+
+#### Stringek tulajdonságai
+* length : Megadja a String típusú változó hosszát, azaz hogy hány karakterből áll.
+
+#### Stringek metódusai
+* trim() : Eltávolítja a felesleges szóközöket, amelyek a String előtt és után találhatóak.
+* concat() : Új karaktereket fűz hozzá a meglévő Stringhez.
+* toLowerCase() : Kisbetűssé alakítja az adott Stringet.
+* toUpperCase() : Az előzővel ellentétben nagybetűssé alakítja a karaktereket.
+
+***
+
+**indexOf();**  
+Megkeresi a Stringen belül egy adott szövegrész kezdetét. A kezdő karakter indexét adja vissza, amely 0-tól kezdődik, azaz az első karakter a 0 sorszámú és így tovább.
+
+**replace();**  
+Kicseréli a megadott szövegrészt a Stringen belül. Ahogy a példában is látni fogod, ennek a metódusnak kettő darab úgynevezett paramétere van, tehát két adatot kell a zárójelek között megadni: először azt, amit cserélni szeretnél, azután pedig azt, amire ki szeretnéd cserélni.
+
+***
+
+### Boolean
+
+A legegyszerűbb változó a Boolean típusú. Csak két értéket vehet fel, ezért a leggyakrabban egy biten tárolható, mert vagy 0 = hamis, vagy 1 = igaz az értéke.
+
+#### Boolean típus
+* Igaz - hamis értékeket tárol.
+* Segítségével egy biten tudod tárolni a logikai értékeket.
+* Két értéket vehet csak fel: true vagy false.
+* Mivel nagyon egyszerű típus, az előzőekben megismert típusokkal szemben nincsenek külön metódusai.
+* 
+A Boolean típusú változókat elsősorban kiértékelések során tudod felhasználni.
+
+#### Logikai kifejezés
+Olyan kifejezés, amely kiértékelése után true vagy false értéket ad vissza. A logikai kifejezések értékekből és operátorokból épülnek fel, például x < y egy logikai kifejezés, mert csak két eset lehetséges, hogy nagyobb vagy nem. Ha nagyobb, akkor true lesz az értéke, ha nem (azaz kisebb vagy egyenlő) akkor pedig false.
+
+#### Logikai operátorok
+Logikai kifejezésekben a következő operátorokat használhatod:
+
+* < kisebb,
+* \> nagyobb,
+* <= kisebb vagy egyenlő,
+* \>= nagyobb vagy egyenlő,
+* == megegyező érték,
+* === megegyező érték és típus,
+* != nem megegyező érték,
+* !== nem megegyező érték és típus,
+* ! tagadás - logikai érték megfordítása,
+* && és,
+* || vagy.
+
+A logikai kifejezésekre szintén érvényesek a zárójelezés szabályai.
+
+#### Különböző típusú változók és a `+` jel
+Azt már tudod, hogy a `+` jel segítségével számokat tudsz összeadni vagy stringek esetén össze tudod őket fűzni. De mi a helyzet, ha különböző típusú változóknál használom a `+` jelet?
+
+Az alábbi példák ezt mutatják be:
+```
+10 + "text"     // "10text" - a számot szövegként kezelte
+10 + "10"       // "1010" - a számot szövegként kezelte most is, azonban:
+10 - "1"        // 9, tehát kivonás esetében számként kezelte
+10 + true       // 11, a true-t 1-nek veszi
+10 - true       // 9
+10 + false      // 10, a false-t 0-nak tekinti
+"10" + true     // "10true", a boolean értéket string-nek veszi
+```
+
+***
+
+### `If` feltétel
+Gyakran kell eldönteni valamiről, hogy igaz vagy hamis. Ha eldöntöttük és igaz, akkor valamilyen műveletet kell végrehajtani, ha pedig nem igaz, akkor valami mást szeretnénk csinálni.
+
+**Erre való az `if-else` programozási szerkezet.**
+
+#### Az `if-else` használata:
+* Az `if` kulcsszó után zárójelben kell megadnod a logikai kifejezést.
+* A logikai kifejezés után kapcsos zárójelek között van az utasítás.
+* Az utasítás után jön az úgynevezett else, a saját utasításával. (Opcionális, azaz nem fontos az `if` után mindig jönni egy `else` utasításnak).
+
