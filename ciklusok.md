@@ -80,7 +80,7 @@ A fontosak, amiket gyakran használsz majd:
 * Szorzás: `x = x * 10`  helyett `x *= 10`
 
 ### Exotikum (nem kötelező tudni, csak agybővítésre)
-Nézzünk egy példát a bitwise azaz bitenkénti és műveletekre. Át kell váltani 2-es számrendszerbe és 32 biten ábrázolni a számokat majd elvégezni rajtuk az and & műveletet:
+Nézzünk egy példát a bitwise azaz bitenkénti és műveletekre. Át kell váltani 2-es számrendszerbe és 32 biten ábrázolni a számokat majd elvégezni rajtuk az `and &` műveletet:
 
 * a 9: 00000000000000000000000000001001
 * a 14: 00000000000000000000000000001110
