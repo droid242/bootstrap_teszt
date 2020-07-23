@@ -142,3 +142,154 @@ massModify('.mass');
 ```
 
 ***
+
+### Children - az elem gyerekei
+A HTML elemek között van egy képletes szülő-gyerek kapcsolat. A beágyazott elemeket, amelyek egy másik elemben vannak, annak gyerekeinek is szokás nevezni. A következő metódusok is innen kapták a nevüket.
+
+### childElementCount
+Az `Element.childElementCount` tulajdonság megmondja, hány gyereke van a HTML elemednek. Ez akkor lehet hasznos, ha keresel benne valamit. Ha először lekéred, hogy egyáltalán vannak-e gyerekei, nem fogsz feleslegesen dolgozni.
+```
+var elementCount = document.getElementById("myDIV").childElementCount;
+```
+
+### childNodes vs. children
+Most megkeressük a gyerekeket.
+
+* `element.childNodes` az összes gyerek, beleértve a kommentek és szövegek is.
+* `element.children` csak az `Element` típusú gyerekek, vagyis komment és szöveg nincs benne.
+```
+let nodes = document.getElementById("myDIV").childNodes.length;
+let children = document.body.children;
+```
+
+### firstChild | lastChild vs. firstElementChild | lastElementChild
+Első vagy utolsó gyerekelem.
+
+* `element.firstChild` az első gyerek, komment vagy szöveg is.
+* `element.firstElementChild` csak az Element típusú első gyerek.
+* `element.lastChild` az utolsó gyerek, komment vagy szöveg is.
+* `element.lastElementChild` csak az Element típusú utolsó gyerek.
+
+***
+
+### Children - gyerek management
+Azt már tudod, hogyan kell lekérni egy Element gyerekeit, most azt is megmutatom, hogyan tudsz hozzáadni újat, vagy meglévőt eltávolítani.
+
+#### document.createElement()
+Mielőtt hozzá akarsz adni egy elemet egy másikhoz, nyilván létre kellene hozni. Ezt szolgálja a `createElement` metódus. Használata nagyon egyszerű.
+
+Megadod, hogy milyen elemet szeretnél létrehozni és elmented egy változóba:
+```
+var div = document.createElement('div');
+```
+
+#### Element.appendChild()
+A neve alapján tehát hozzáfűz egy új elemet a meglévőhöz. Egészen pontosan nem is hozzá, hanem bele fűzi, mivel ezzel a metódussal abban az Element -ben hoz létre egy új gyerek Element -et, amelyre a metódust meghívod. Az új elem az utolsó lesz a szülő Element gyerekei között.
+
+Lépésről lépésre:
+* Kell egy Element, amibe bele akarod tenni az újat. `querySelector`
+* Létre kell hozni egy új elemet. `createElement`
+* Ha szükséges, be lehet állítani az új Element tuajdonságait. `setAttribute`
+* Végül az új elemet hozzáadod a kiválaszott Element-hez. `appendChild`
+
+Bővebben a példában:
+```
+var li = document.querySelector("ul li");
+var anchor = document.createElement("li");
+anchor.innerHTML = "Water";
+anchor.setAttribute("href", "https://training360.com");
+li.appendChild(a);
+```
+
+#### Element.removeChild()
+Egy kis szintaxis: `node.removeChild(node)` Nagyon hasonlít a testvérére az `appendChild`-ra, csak nem kell elemet létrehozni.
+
+Lépésről lépésre:
+* Kell egy Element, amiből az egyik child-ot el akarjuk távolítani. `querySelector`
+* Kell az az elem, amit el akarunk távolítani. `querySelector`
+* Végül az eltávolítás. Fontos, hogy csak child elemet lehet. `removeChild`
+
+Bővebben a példában:
+```
+var ul = document.querySelector("ul");
+var li = document.querySelector("ul li:first-child");
+ul.removeChild(li);
+```
+
+***
+
+### Event - az esemény
+A JavaScriptben lehetőség van eseményeket figyelni, és a hatásukra valamilyen kódot futtatni. Ilyen esemény például amikor betöltődik az oldal, vagy a felhasználó rákattint egy elemre.
+
+#### = vs. addEventListener
+Ha azt szeretnéd, hogy történjen valami, ha mondjuk egy gombra kattintanak, azt háromféleképpen is meg tudod adni.
+
+1. Element attribútummal: `<element onclick="myScript">`
+2. JavaScriptből hasonlóan: `object.onclick = function() { myScript };`
+3. addEventListenerrel: `object.addEventListener("click", myScript);`
+4. 
+Az első kettőnél egy eseményre csak egy működést adhatsz meg, míg az addEventListener használatával többet is.
+
+> **Fontos:** addEventListener esetén nem kell az on szócska az esemény neve elé.
+
+#### Window események
+A közös bennük, hogy nem felhasználói beavatkozásra történnek meg, hanem a böngésző működése váltja ki őket. Nem csak a window -ra lehet őket megadni, a legtöbb elem esetén használhatóak.
+
+A fontosabbak:
+* `onload` az objektum betöltődött
+* `onresize` az objektumot átméretezték
+* `onscroll` scrolloztak az objektumon
+
+Például figyelhetjük ha scrolloztak, és egy bizonyos távolsagra az oldal tetejétől kisebbre vehetjük a fejlécet, vagy elrejthetünk bizonyos elemeket:
+```
+window.onscroll = myFunction;
+function myFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    document.getElementById("myP").className = "test";
+  } else {
+    document.getElementById("myP").className = "";
+  }
+}
+```
+
+***
+
+### Mouse events - egér események
+A leggyakrabban figyelt események az egér események. Itt bejönnek a képbe a mobil eszközök is, mert ott már nincs egér, hanem legtöbbször ujjal kezelik őket. Ezeknél a kattintás a tap-et, azaz a tapintást jelenti.
+
+A legfontosabbak:
+* `onclick` kattintás vagy tappintás, ha mobileszközről van szó
+* `onmouseover` az elem fölé viszik az egérmutatót (mobilon értelmetlen)
+* `onmouseout` az elemről elhúzzák az egérmutatót (mobilon értelmetlen)
+* 
+Mindegyiket valamilyen konkrét HTML elemre, azaz Element típusú objektumra lehet beállítani, a fent részletezett három mód valamelyikével:
+```
+function fillPre(content) {
+  document.querySelector('pre').innerHTML = content;
+}
+let button = document.querySelector('.click-button');
+button.addEventListener('click', function(event) {
+  var className = this.className;
+  fillPre('clicked: ' + className);
+});
+```
+
+### onchange és onsubmit - form elemek
+Fontos értesülnöd róla, ha valaki piszkálja a formot.
+* `onchange` input elemek értékének változását figyelheted.
+* `onsubmit` a form (űrlap) elküldése előtt fut le, ezt figyelheted vele. Ha az eseménykezelő függvény visszatérési értéke false, akkor az űrlap nem kerül elküldésre.
+```
+function fillPre(content) {
+  document.querySelector('pre').innerHTML = content;
+}
+var inputList = document.querySelectorAll('input');
+for (var i = 0; i < inputList.length; i++) {
+  if (inputList[i].addEventListener) {
+    inputList[i].addEventListener('change', function(event) {
+      fillPre( this.className + ': ' + this.value );
+    });
+  }
+}
+```
+
+***

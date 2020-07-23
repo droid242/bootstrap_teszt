@@ -21,3 +21,49 @@ function showSumPrice(price, amountNumber) {
         showAmount.innerHTML = `${amount}`;
     }
 }
+
+
+// DOM - Add help text
+let helpText = document.createElement("small");
+helpText.className = "form-text text-muted";
+
+helpText.innerHTML = "Adja meg a feltéteket!";
+
+let parent = document.querySelector("div.form-group:nth-child(1)");
+parent.appendChild(helpText);
+
+parent.removeChild(helpText);
+
+
+// DOM - Window event
+let sendButton = document.querySelector("form .btn.btn-primary");
+
+/* sendButton.onclick = function() {
+    alert("Hello JS!");
+} */
+
+sendButton.addEventListener("click", function() {
+    alert("Helló JS!");
+});
+
+window.addEventListener("resize", function() {
+    console.log(this.innerHeight, this.innerWidth);
+});
+
+
+//DOM - Egér események, űrlap események
+let orderForm = document.querySelector("#orderForm");
+
+orderForm.addEventListener("submit", function(ev) {
+    ev.preventDefault(); //megakadályozza az oldal újra betöltését - az alap működést akadályozza meg
+    //console.log(this);
+
+    let inputs = this.querySelectorAll("input");
+    let values = {};
+
+    for(let i = 0; i < inputs.length; i++) {
+        values[inputs[i].name] = inputs[i].value;
+    }
+
+    console.log(values);
+});
