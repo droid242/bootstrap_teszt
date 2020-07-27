@@ -293,3 +293,196 @@ for (var i = 0; i < inputList.length; i++) {
 ```
 
 ***
+
+### Parent
+Angolul szülőt jelent és az is. Ha egy elemnek lehetnek gyerekei, és meg lehet kérdezni, hogy hány gyereke van, és akár keresni is lehet közöttük, ugyanígy ha a gyermek elem felől nézzük a dolgot, annak is működnie kell. Jöjjön a kik a szüleid kérdés. Illetve pontosítok: ki a szülőd, mivel minden elemnek csak egyetlen közvetlen szülője lehet.
+
+#### parentNode vs. parentElement
+**parentNode:** az adott elem szülő node-ját adja vissza, mely lehet Element vagy gyökérelem esetén a document.  
+** parentElement:** az adott elem szülő elemét adja vissza, mely mindig egy Element, vagy gyökérelem esetén null.
+
+Fontos különbség van a node és az element között. A Node egy csomópont a dokumentumban, lehet egy egyszerű textNode is, ami nem valódi HTML Element. Mert minden Element node, de nem minden node element :)
+```
+document.body.parentNode; // <html>
+document.body.parentElement; // <html> element
+```
+
+#### Munka a szülőkkel
+A példában elrejtem a span szülőjét a kíváncsi tekintetek elől:
+```
+<div>
+  <span onclick="this.parentElement.style.display = 'none';">x</span>
+</div>
+```
+
+Kattintásra a div-nek fogja a style.display tulajdonságát "none"-ra állítani. Tehát a kattintott elem szülőjének.
+
+***
+
+### Switch - a kapcsoló
+Ahogy a neve is mutatja, a switch egy kapcsoló. Több állása is lehet, egy változót vagy kifejezést vizsgál, és annak az értéke alapján ugrik a megfelelő utasításhoz.
+
+#### Használata
+Egy paramétere van, egy olyan változó vagy kifejezés, ami értéket ad vissza. Azután meg kell adni, hogy milyen érték hatására milyen utasítás fusson le.
+
+Kulcsszavak:
+* `switch(value)` - a value az az érték, amit figyel a switch.
+* `case value`: kifejezés break; - ha a value megegyezik a vizsgált értékkel, lefut a kifejezés, utána break utasítást teszünk, hogy a többi ne fusson le.
+* `default`: kifejezés - ha egyik case sem volt igaz, akkor ez fog lefutni.
+
+Előnye, hogy gyorsabb, mint az `else...if`, viszont csak konkrét értékeket lehet vele vizsgálni, azaz például kisebb-nagyobb logikai kifejezést nem tud értelmezni.
+
+Megkeresem a hét napjának nevét a száma alapján:
+```
+let weekDay = 1;
+let dayName = '';
+
+switch(weekDay) {
+  case 0:
+    dayName = 'Vasárnap';
+    break;
+  case 1:
+    dayName = 'Hétfő';
+    break;
+  default:
+    dayName = 'No Day Name';
+}
+console.log(dayName);
+```
+
+***
+
+### While ciklus
+Ahogy a neve is mutatja, mindaddig fut amíg a megadott feltétel igaz. Egy paramétere van, ami egy logikai kifejezés, ennek kell igaznak lennie, hogy a ciklus újra lefusson.
+
+#### Használata
+Paraméterei:
+* feltétel: egy logikai kifejezés.
+
+Egy while ciklus létrehozása:
+```
+let i = 0;
+while(i < 5) {
+  console.log(i);
+  i++;
+}
+```
+
+#### Végtelen ciklus
+A `while` ciklus használata esetén gyakran előfordul, hogy a feltételt nem figyeljük megfelelően. Ekkor fordul elő, hogy a feltétel mindig igaz marad, és a ciklus végtelen hurokba kerül. A különböző értelmezők általában bizonyos számú futás után hibát adnak és leállnak, vagy lefagy a felület, mint például az alábbi esetben is.
+
+> **Mindig figyelj oda a feltétel megfelelő frissítésére!**
+
+Az alábbi példa egy végtelen ciklust mutat be.
+
+A probléma az, hogy a feltételt elfelejtettem módosítani a ciklusmagban (persze direkt):
+```
+let i = 0;
+while(i < 5) {
+  console.log(i);
+}
+```
+
+#### Kollekciók bejárása
+Természetesen a `while` ciklus is alkalmas arra, hogy tömböket vagy objektumokat járj be a segítségével. Itt viszont nem kapsz semmi segítséget ehhez, neked kell leprogramoznod a kulcsok léptetését.
+
+A példában kiolvasom a kulcsokat, majd bejárom az objektumot, közben pedig növelem az iterátort, ami alapján előállítom a kulcsokat:
+```
+let obj = {
+  'name': 'Cat',
+  'age': 3
+};
+let keys = Object.keys(obj);
+let i = 0;
+
+while(i < keys.length) {
+  console.log(obj[keys[i]]);
+  i++;
+}
+```
+
+#### do while - hátultesztelő ciklus
+Az elöltesztelős ciklusoknál megfigyelhettük, hogy először a feltétel vizsgálata történik meg, majd utána a kiértékelés eredményétől függően a ciklusmag futtatása. Ezzel szemben a hátultesztelős ciklus először lefuttatja a ciklusmagot, és csak utána vizsgálja meg a feltételt. A gyakorlatban ez a következőképp fest:
+```
+var i = 10;
+do {
+  console.log(i);
+  i++;
+}
+while ( i < 0 );
+```
+
+A fenti esetben a konzolra kiírja a program, hogy 10, ugyanis a hátultesztelős ciklus lényege, hogy akár igaz a feltétel, akár hamis, egy alkalommal biztosan le fog futni.
+
+***
+
+### DOM manipuláció
+Most összetett struktúrákat, listákat, táblázatokat fogunk generálni js-sel. Izgalmas lesz.
+
+#### Lista while cilkussal
+Bemelegítésnek készítek egy p elemekből álló listát while ciklussal:
+```
+let numbers = [1,2,3,4,5,6];
+let i = 0;
+let container = document.querySelector("div");
+while(i < numbers.length) {
+  let p = document.createElement("p");
+  p.innerHTML = numbers[i];
+  container.appendChild(p);
+  i++;
+}
+```
+
+Mit tettem?
+* Létrehoztam a numbers tömböt.
+* Beállítottam az i változót, ez lett az index.
+* Megkerestem az első div-et az oldalon.
+* Addig futtattam a while ciklust, amíg kisebb az i, mint a tömb hossza.
+* A ciklusban létrehoztam egy p elemet és beállítottam a tartalmát a numbers tömb aktuális elemére.
+* Hozzáadtam a p elemet a container-hez, ami egy div.
+* Végül növeltem az i változót eggyel.
+
+***
+
+### Táblázat rajzolása objektumtömbből
+Amikor egy szevrerről megkapod mondjuk a felhasználókat, az a legtöbbször egy tömb lesz, ami az egyes felhasználókat objektumként tartalmazza. Erre szokták mondani, hogy objektumtömb, vagy objektumok tömbje.
+
+Legyen hát egy objektumtömböd:
+```
+let users = [
+{
+  "_id": "5cdad500da7a3648b7f5a3f3",
+  "name": "Berger Whitney",
+  "company": "ENAUT",
+  "email": "berger.whitney@enaut.name"
+},
+{
+  "_id": "5cdad50017e5fdde3c44bc5b",
+  "name": "Laverne Dale",
+  "company": "PYRAMIS",
+  "email": "laverne.dale@pyramis.io"
+}
+];
+```
+
+Minden felhasználó objektuma azonosan épül fel, de az adataik természetesen különbözőek.
+
+***
+
+### Rajzolj táblázatot!
+```
+let table = document.querySelector("#demoTable");
+for ( let i = 0; i < users.length; i++ ) {
+  let tr = document.createElement("tr");
+  for ( let data of Object.values(users[i]) ) {
+    let td = document.createElement("td");
+    td.innerHTML = data;
+    tr.appendChild(td);
+  }
+  table.appendChild(tr);
+}
+```
+
+A helyes táblázathoz két egymásba ágyazott ciklus kell. Az egyikben létrehozod a sorokat, a másikban a cellákat a sorokon belül. Amikor elkészíted a fenti példát a saját gépeden, használd a Google Chrome beépített debug eszközét ahogy tanultuk. Állítsd meg minden sorban a ciklusokat és nézd végig a változók pillanatnyi értékét.
+
+***
